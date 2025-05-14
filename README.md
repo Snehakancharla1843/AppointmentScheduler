@@ -1,1 +1,126 @@
 # AppointmentScheduler
+College Appointment Scheduler API
+
+A Node.js/Express backend that enables secure, end-to-end appointment booking between students and professors. Professors publish available time slots, students browse and book, and professors can accept or cancel appointments. All interactions are protected by JWT-based authorization and data is stored in MongoDB.
+
+Features
+
+User Authentication
+
+POST /auth/login for students and professors
+
+JWT issued on login, validated by authMiddleware
+
+Professor Dashboard
+
+Publish Slots: POST /professor/dashboard/settimeslot
+
+View Slots: GET /professor/dashboard/viewslots
+
+Manage Appointments:
+
+List booked/pending: GET /professor/dashboard/appointments
+
+Filter by student: GET /professor/dashboard/appointments/:studentName
+
+Accept booking: POST /professor/dashboard/appointments/:studentName/accept
+
+Cancel booking: POST /professor/dashboard/appointments/:studentName/cancel
+
+Student Dashboard
+
+Browse Slots:
+
+All slots: GET /student/dashboard/viewslots
+
+By professor: GET /student/dashboard/viewslots/:professorName
+
+Book Appointment: POST /student/dashboard/viewslots/:professorName/book
+
+View My Appointments: GET /student/dashboard/appointments
+
+Technologies Used
+
+Node.js & Express for server and routing
+
+MongoDB Atlas & Mongoose for data modeling
+
+JSON Web Tokens (jsonwebtoken) for auth
+
+dotenv for environment configuration
+
+cors & cookie-parser for request handling
+
+Postman for manual API testing
+
+Prerequisites
+
+Node.js (v14+)
+
+MongoDB Atlas connection URI
+
+Git
+
+Installation & Setup
+
+Clone the repository
+
+bash
+Copy
+git clone https://github.com/<your-username>/college-appointment-scheduler.git
+cd college-appointment-scheduler
+Install dependencies
+
+bash
+Copy
+npm install
+Configure environment
+Create a .env file in the project root:
+
+env
+Copy
+MONGODB_URI=<Your MongoDB Atlas connection string>
+JWT_SECRET=<Your JWT secret>
+PORT=5000
+Run the server
+
+bash
+Copy
+npm start
+The API will be available at http://localhost:5000.
+
+Usage
+
+Authenticate
+
+bash
+Copy
+curl -X POST http://localhost:5000/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"user@example.com","password":"password"}'
+Copy the returned JWT for the Authorization header in subsequent requests.
+
+Professor Sets a Slot
+
+
+ POST http://localhost:5000/professor/dashboard/settimeslot \
+  -H "Authorization: Bearer <JWT>" \
+  -H "Content-Type: application/json" \
+  -d '{"date":"2025-06-15","time":"10:00 AM"}'
+Student Books a Slot
+
+bash
+Copy
+curl -X POST http://localhost:5000/student/dashboard/viewslots/Dr.Smith/book \
+  -H "Authorization: Bearer <JWT>"
+View Appointments
+
+bash
+Copy
+curl -X GET http://localhost:5000/student/dashboard/appointments \
+  -H "Authorization: Bearer <JWT>"
+Contributing
+Feel free to fork this repository and make improvements! Submit a pull request with any enhancements, bug fixes, or additional features.
+
+License
+This project is licensed under the MIT License.
