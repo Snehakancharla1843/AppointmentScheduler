@@ -67,60 +67,25 @@ Clone the repository
 
 bash
 Copy
-git clone https://github.com/<your-username>/college-appointment-scheduler.git
+git clone https://github.com/Snehakancharla1843/AppointmentScheduler.git
 cd college-appointment-scheduler
 Install dependencies
-
-bash
-Copy
 npm install
 Configure environment
 Create a .env file in the project root:
 
 env
-Copy
+
 MONGODB_URI=<Your MongoDB Atlas connection string>
 JWT_SECRET=<Your JWT secret>
 PORT=5000
 Run the server
-
-bash
-Copy
 npm start
 The API will be available at http://localhost:5000.
 
-Usage
-
-Authenticate
-
-bash
-Copy
-curl -X POST http://localhost:5000/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"email":"user@example.com","password":"password"}'
-Copy the returned JWT for the Authorization header in subsequent requests.
-
-Professor Sets a Slot
 
 
- POST http://localhost:5000/professor/dashboard/settimeslot \
-  -H "Authorization: Bearer <JWT>" \
-  -H "Content-Type: application/json" \
-  -d '{"date":"2025-06-15","time":"10:00 AM"}'
-Student Books a Slot
 
-bash
-Copy
-curl -X POST http://localhost:5000/student/dashboard/viewslots/Dr.Smith/book \
-  -H "Authorization: Bearer <JWT>"
-View Appointments
-
-bash
-Copy
-curl -X GET http://localhost:5000/student/dashboard/appointments \
-  -H "Authorization: Bearer <JWT>"
-Contributing
-Feel free to fork this repository and make improvements! Submit a pull request with any enhancements, bug fixes, or additional features.
 
 License
 This project is licensed under the MIT License.
